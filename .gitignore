@@ -1,0 +1,5 @@
+demo_server.log
+*.pyc
+.venv/
+*.key
+*.pub

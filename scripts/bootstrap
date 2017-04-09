@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Sets up the service dev dependancies
+
+# Set up virtualenv
+pip3.6 install virtualenv
+virtualenv .venv
+source .venv/bin/activate
+
+# Get python dependancies
+pip3.6 install -Ir requirements.txt

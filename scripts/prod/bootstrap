@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Sets up the service dependancies
+# Intended for Ubuntu 16.04 LTS
+
+mkdir -p /var/log/spacecmd
+
+# Install python3.6, nginx, and supervisor
+add-apt-repository ppa:jonathonf/python-3.6 -y
+apt-get update
+apt-get install python3.6 -y
+
+# Install pip for python3.6
+curl "https://bootstrap.pypa.io/get-pip.py" -o "/tmp/get-pip.py"
+python3.6 /tmp/get-pip.py
+
+# Set up virtualenv
+pip3.6 install virtualenv
+virtualenv /srv/spacecmd/.venv
+source /srv/spacecmd/.venv/bin/activate
+
+# Get python dependancies
+pip3.6 install -Ir /srv/spacecmd/requirements.txt
+
+# Link nginx config
+ln -sf /srv/spacecmd/prod/nginx.conf /etc/nginx/sites-available/spacecmd
+ln -sf /etc/nginx/sites-available/spacecmd /etc/nginx/sites-enabled/spacecmd
+
+# Link supervisor config
+ln -sf /srv/spacecmd/prod/supervisor.conf /etc/supervisor/conf.d/spacecmd.conf
+
+# Start service
+supervisorctl reread
+supervisorctl update
+
+# Reload nginx
+nginx -s reload

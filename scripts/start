@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Sets up the service in development
+
+source .venv/bin/activate
+export PYTHONPATH=./
+python3 spacecmd/main.py
