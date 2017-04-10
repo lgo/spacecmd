@@ -8,7 +8,7 @@ from spacecmd.middleware.splashscreen import SplashScreen
 from spacecmd.curses import Curses
 
 DEFAULTS = {
-    'host': 'localhost',
+    'host': '',
     'port': 2200,
     'host_key': None,
     'middleware': [],

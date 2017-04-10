@@ -15,7 +15,7 @@ from spacecmd.logger import log
 # logging.basicConfig(level=logging.INFO, format='%(levelname)s %(threadName)s %(message)s')
 # log.s/etLevel(logging.INFO)
 
-HOST_ADDRESS = 'localhost'
+HOST_ADDRESS = ''
 PORT = 2200
 
 if __name__ == "__main__":

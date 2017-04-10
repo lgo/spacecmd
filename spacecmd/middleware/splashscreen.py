@@ -6,14 +6,15 @@ import time
 class SplashScreen(object):
 
     def action(self, curses):
+        curses.chan.send(terminal.get_value('xterm-256color', terminal.SAVE_SCREEN))
         curses.init_space()
         while True:
-            if curses.chan.recv_ready():
-                while True:
-                    char = curses.chan.recv(1)
-                    if char in [terminal.TERM, terminal.INT]:
-                        curses.chan.close()
-                        raise Exception("Client closed")
+            while curses.chan.recv_ready():
+                char = curses.chan.recv(1)
+                if char in [terminal.TERM, terminal.INT]:
+                    curses.chan.send(terminal.get_value('xterm-256color', terminal.RECOVER_SCREEN))
+                    curses.chan.close()
+                    raise Exception("Client closed")
             instructions = ""
             instructions += terminal.get_value('xterm-256color', terminal.HOME)
             instructions += terminal.get_value('xterm-256color', terminal.FOREGROUND_COLOR(2))

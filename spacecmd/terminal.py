@@ -1,9 +1,9 @@
 import os
 
-TERM = '\x03'
-INT = '\x04'
-BACKSPACE = '\x08'
-DELETE = '\x7f'
+TERM = b'\x03'
+INT = b'\x04'
+BACKSPACE = b'\x08'
+DELETE = b'\x7f'
 
 LARROW = 67
 RARROW = 68
